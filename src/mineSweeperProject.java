@@ -29,10 +29,6 @@ public class mineSweeperProject {
 //------------------------------------------------------------------------------------------------------ initialize
 
 
-
-
-
-
 // -------------------------------------------------------------------------generating bombs and and placing them randomly
 
         for (int i = 1; i <= 10; i++) {
@@ -79,10 +75,6 @@ public class mineSweeperProject {
 //-------------------------------------------------------------------------generating bombs and field and placing them randomly
 
 
-
-
-
-
 // -------------------------------------------------------------------------refreshing the field with the changes
 
 
@@ -110,6 +102,7 @@ public class mineSweeperProject {
             if (x > 101) {
                 x = 0;
             }
+            dispayIfNearbyIsABomb(field, x);
             checkForMines(x, field);
             printTableAfetCheck(field, x);
 
@@ -133,17 +126,12 @@ public class mineSweeperProject {
     //-------------------------------------------------------------------------refreshing the field with the changes
 
 
-
-
-
-
-
     private static void checkForMines(int x, int[] field) {
 // checks for mine and gives a different value of the indexes of the array that we are using for the field
         // also display message for quitting  the game
 
 
-        if (x < 101 && x > 0) {
+        if (x < 100 && x > 0) {
             x -= 1;
             if (field[x] == 1) {
                 System.out.println("It is a bomb !");
@@ -157,6 +145,48 @@ public class mineSweeperProject {
         }
     }
 //------------------------------------------------------------------------------------------
+
+    public static void dispayIfNearbyIsABomb(int[] field, int x) {
+        x -= 1;
+        if (x < 100 && x > 0) {
+            if (x >= 10 && x < 90) {
+                if (field[x - 1] == 1) {
+                    System.out.println("There is a bomb on left");
+                }
+                if (field[x + 1] == 1) {
+                    System.out.println("There is a bomb on right");
+                }
+                if (field[x + 10] == 1) {
+                    System.out.println("There is a bomb downside");
+                }
+                if (field[x - 10] == 1) {
+                    System.out.println("There is a bomb upside");
+                } else if (x < 10 && x > 1) {
+                    if (field[x - 1] == 1) {
+                        System.out.println("There is a bomb on left");
+                    }
+                    if (field[x + 1] == 1) {
+                        System.out.println("There is a bomb on right");
+                    }
+                    if (field[x + 10] == 1) {
+                        System.out.println("There is a bomb downside");
+                    }
+                } else if (x < 98 && x > 90) {
+                    if (field[x - 1] == 1) {
+                        System.out.println("There is a bomb on left");
+                    }
+                    if (field[x + 1] == 1) {
+                        System.out.println("There is a bomb on right");
+                    }
+                    if (field[x - 10] == 1) {
+                        System.out.println("There is a bomb upside");
+                    }
+                }
+            }
+
+        }
+
+    }
 
 
     public static void printTableAfetCheck(int[] field, int x) {
@@ -192,9 +222,6 @@ public class mineSweeperProject {
         }
 
     }
-
-
-
 
 
     public static int[] flagsForBombs(int[] field, int[] flags) {
@@ -262,10 +289,6 @@ public class mineSweeperProject {
 
         return flags;
     }
-
-
-
-
 
 
     //-----------------------------------------------------------------------------stuff for timer
