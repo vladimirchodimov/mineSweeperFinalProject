@@ -10,31 +10,37 @@ public class mineSweeperProject {
     private boolean running = false;
 
     public static void main(String[] args) {
-
+//----------------------------------------------------------------------------------------------------- initialize
         StopWatch s = new StopWatch();
         s.start();
-        long timeForChange= s.getElapsedTime();
+        long timeForChange = s.getElapsedTime();
 
         Scanner input = new Scanner(System.in);
-//----------------------------------------------------------------------------------------------------- initialize
-        int row = 0;   //use only to change the row in if statement
 
-        int field[] = new int[100];   //array for taking the value of the field cordinates
+        int row = 0;   //use only to change the row in if statement for the array field
+
+        int field[] = new int[100];   //array for  the field
         int[] flags = new int[10];
         Random bombGenerator = new Random();
-        int field1 = 0;    //gadering the numbers from 1 to 2 generated from the random generator
-        int x; // system keyboard input
+        int field1 = 0;           //gadering the numbers from 1 to 2 generated from the random generator and fills array
+        int x;                    // system keyboard input
         int numberOfBombs = 0;
 
 //------------------------------------------------------------------------------------------------------ initialize
 
-        //-------------------------------------------------------------------------generating bombs and field
-        // and placing them randomly
+
+
+
+
+
+// -------------------------------------------------------------------------generating bombs and and placing them randomly
 
         for (int i = 1; i <= 10; i++) {
             System.out.print("[ " + i + " ]");
         }
         System.out.println("");
+        System.out.println("_____________________________________________________");
+
         for (int i = 0; i < field.length; i++) {
             field1 = 1 + bombGenerator.nextInt(4); // the idea is to start from 1
             row++;
@@ -56,7 +62,7 @@ public class mineSweeperProject {
             if (field[i] == 1 || field[i] == 2) {
 
                 System.out.print("[");
-                System.out.print(" " + field[i] + " ");  // blanck or field[i]
+                System.out.print(" ? ");  // blanck or field[i]
                 System.out.print("]");
 
             }
@@ -66,25 +72,36 @@ public class mineSweeperProject {
             }
 
         }
+
+        System.out.println("_____________________________________________________");
         flagsForBombs(field, flags);
 
-//-------------------------------------------------------------------------generating bombs and field
-// and placing them randomly
+//-------------------------------------------------------------------------generating bombs and field and placing them randomly
+
+
+
+
 
 
 // -------------------------------------------------------------------------refreshing the field with the changes
+
+
         System.out.println("The flag of the Bombs");
-        System.out.println("_____________________________________________________");
-        s.getTimeForAll();
 
 
         for (int j = 0; j < flags.length; j++) {
             System.out.print("~ " + flags[j] + " ~");
 
         }
+
         System.out.println("");
         System.out.println("_____________________________________________________");
+
+        s.getTimeForAll();
+
+        System.out.println("_____________________________________________________");
         do {
+            System.out.println(" ");
 
             System.out.println("Въведете стойност за  позиция по хоризонтала и вертикала от 1 до 100, " +
                     "ако желаете да излезете от програмата натиснете 0 или число над 101");
@@ -96,21 +113,31 @@ public class mineSweeperProject {
             checkForMines(x, field);
             printTableAfetCheck(field, x);
 
-            System.out.println("The flag of the Bombs");
+
             System.out.println("_____________________________________________________");
-            s.getTimeForAll();
+            System.out.println("The flag of the Bombs");
+
             for (int j = 0; j < flags.length; j++) {
                 System.out.print("~ " + flags[j] + " ~");
 
             }
             System.out.println("");
             System.out.println("_____________________________________________________");
+            s.getTimeForAll();
 
+            System.out.println("_____________________________________________________");
         } while (x > 0);
         s.stop();
     }
 
     //-------------------------------------------------------------------------refreshing the field with the changes
+
+
+
+
+
+
+
     private static void checkForMines(int x, int[] field) {
 // checks for mine and gives a different value of the indexes of the array that we are using for the field
         // also display message for quitting  the game
@@ -138,6 +165,8 @@ public class mineSweeperProject {
             System.out.print("[ " + i + " ]");
         }
         System.out.println("");
+        System.out.println("_____________________________________________________");
+
         for (int j = 0; j < field.length; j++) {
             row3++;
 
@@ -164,71 +193,82 @@ public class mineSweeperProject {
 
     }
 
-    //------------------------------------------------------------ gives a value for the flags
+
+
+
 
     public static int[] flagsForBombs(int[] field, int[] flags) {
+//        ------------------------------------------------------------ gives a value for the flags
 
-
-        for (int i = 0; i < field.length; i++) {
-
-
-            if (field[i % 10] == 1 && field[i] == 1) {
-                flags[0] += 1;
+        for (int i = 0; i < field.length; i += 10) {
+            if (field[i] == 1) {
+                flags[0]++;
             }
+        }
 
-            if (field[i % 10] == 2 && field[i] == 1) {
-
-                flags[1] += 1;
-
+        for (int i = 1; i < field.length; i += 10) {
+            if (field[i] == 1) {
+                flags[1]++;
             }
-            if (field[i % 10] == 3 && field[i] == 1) {
+        }
 
-                flags[2] += 1;
+        for (int i = 2; i < field.length; i += 10) {
+            if (field[i] == 1) {
+                flags[2]++;
             }
+        }
 
-            if (field[i % 10] == 4 && field[i] == 1) {
-
-                flags[3] += 1;
+        for (int i = 3; i < field.length; i += 10) {
+            if (field[i] == 1) {
+                flags[3]++;
             }
+        }
 
-            if (field[i % 10] == 5 && field[i] == 1) {
-
-                flags[4] += 1;
+        for (int i = 4; i < field.length; i += 10) {
+            if (field[i] == 1) {
+                flags[4]++;
             }
+        }
 
-            if (field[i % 10] == 6 && field[i] == 1) {
-
-                flags[5] += 1;
+        for (int i = 5; i < field.length; i += 10) {
+            if (field[i] == 1) {
+                flags[5]++;
             }
+        }
 
-            if (field[i % 10] == 7 && field[i] == 1) {
-
-                flags[6] += 1;
+        for (int i = 6; i < field.length; i += 10) {
+            if (field[i] == 1) {
+                flags[6]++;
             }
+        }
 
-            if (field[i % 10] == 8 && field[i] == 1) {
-
-                flags[7] += 1;
+        for (int i = 7; i < field.length; i += 10) {
+            if (field[i] == 1) {
+                flags[7]++;
             }
+        }
 
-            if (field[i % 10] == 9 && field[i] == 1) {
-
-                flags[8] += 1;
+        for (int i = 8; i < field.length; i += 10) {
+            if (field[i] == 1) {
+                flags[8]++;
             }
+        }
 
-            if (field[i % 10] == 0 && field[i] == 1) {
-
-                flags[9] += 1;
+        for (int i = 9; i < field.length; i += 10) {
+            if (field[i] == 1) {
+                flags[9]++;
             }
-
-
         }
 
         return flags;
     }
+
+
+
+
+
+
     //-----------------------------------------------------------------------------stuff for timer
-
-
 
     public void start() {
         this.startTime = System.currentTimeMillis();
