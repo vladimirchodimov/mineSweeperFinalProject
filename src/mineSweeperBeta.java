@@ -15,8 +15,8 @@ public class mineSweeperBeta {
         printField(field);
 
 
-        int x = 0;
-        int y = 0;
+        int x ;
+        int y ;
         do {
 
             System.out.println("Enter coordinate y: ");
@@ -53,16 +53,58 @@ printFieldAfterCheck(field,y,x);
 
     public static void printFieldAfterCheck(int[][] field, int y, int x) {
         System.out.println("_________________________________________________");
+
+        if(field[y][x]==1){
+            field[y][x]=11;
+        }
+        if(field[y][x]==2){
+            field[y][x]=22;
+        }
+        if(field[y][x]==3){
+            field[y][x]=33;
+        }
+        if(field[y][x]==4){
+            field[y][x]=44;
+        }
+        if(field[y][x]==5){
+            field[y][x]=55;
+        }
+        if(field[y][x]==6){
+            field[y][x]=66;
+        }
+        if(field[y][x]==0){
+            field[y][x]=77;
+        }
+        if(field[y][x]==9){
+            field[y][x]=99;
+        }
+
+
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[i].length; j++) {
-                if (field[y][x] == 0) {
+                if (field[i][j] == 77) {
                     System.out.print("[ " + " " + " ]");  //field[i][j]
                 }
-                if (field[y][x] == 9) {
+                if (field[i][j] == 99) {
                     System.out.print("[ " + "*" + " ]");  //field[i][j]
                 }
-                if (field[y][x] != 0||field[y][x] != 9) {
-                    System.out.print("[ " + field[y][x] + " ]");  //field[i][j]
+                if (field[i][j] == 66) {
+                    System.out.print("[ " + "6" + " ]");  //field[i][j]
+                }
+                if (field[i][j] == 55) {
+                    System.out.print("[ " + "5" + " ]");  //field[i][j]
+                }
+                if (field[i][j] == 44) {
+                    System.out.print("[ " + "4" + " ]");  //field[i][j]
+                }
+                if (field[i][j] == 33) {
+                    System.out.print("[ " + "3" + " ]");  //field[i][j]
+                }
+                if (field[i][j] == 22) {
+                    System.out.print("[ " + "2" + " ]");  //field[i][j]
+                }
+                if (field[i][j] ==11) {
+                    System.out.print("[ " + "1" + " ]");  //field[i][j]
                 }else {
                     System.out.print("[ " + "?" + " ]");
                 }

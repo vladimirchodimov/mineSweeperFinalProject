@@ -127,7 +127,7 @@ public class mineSweeperProject {
 
 
     private static void checkForMines(int x, int[] field) {
-// checks for mine and gives a different value of the indexes of the array that we are using for the field
+// checks for mine
         // also display message for quitting  the game
 
 
