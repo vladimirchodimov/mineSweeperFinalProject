@@ -14,9 +14,10 @@ public class mineSweeperBeta {
         placingFlagsOnTheField(field);
         printField(field);
 
+        int a = 0;
 
-        int x ;
-        int y ;
+        int x;
+        int y;
         do {
 
             System.out.println("Enter coordinate y: ");
@@ -24,93 +25,113 @@ public class mineSweeperBeta {
             System.out.println("Enter coordinate x: ");
             x = input.nextInt();
 
-            if (field[y][x] == 9) {
-                System.out.println("there is a bomb");
-            } else {
-                System.out.println("there is " + field[y][x] + " bombs nearby");
+            if (x < 99 || y < 99) {
+                if (x > 9 || y > 5) {
+                    System.out.println("Please enter value for X<9 and Y<5 or enter 100 for exit");
+                } else {
+
+                    if (field[y][x] == 9) {
+                        System.out.println("there is a bomb");
+                    } else {
+                        System.out.println("there is " + field[y][x] + " bombs nearby");
+                    }
+                    printFieldAfterCheck(field, y, x);
+
+
+                    Date time = new Date();
+                    String zeroTime = time.toString();
+                    System.out.println(zeroTime.substring(14, 19));
+                }
             }
-printFieldAfterCheck(field,y,x);
-
-            Date time = new Date();
-            String zeroTime = time.toString();
-            System.out.println(zeroTime.substring(14, 19));
-
-        } while (x <= 100 || y <= 100);
+            a = checkIfAllTheFieldsOpened(field, a);
+        } while ((x != 100 || y != 100) && a == 1);
+        System.out.println("You have quit the game");
     }
 
     public static void printField(int[][] field) {
+        for (int i = 0; i <= 9; i++) {
+            System.out.print("[ " + i + " ]");
+        }
+        System.out.println("");
         System.out.println("_________________________________________________");
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[i].length; j++) {
 
                 System.out.print("[ " + "?" + " ]");  //field[i][j]
             }
-            System.out.println();
+            System.out.println("|" + "[ " + i + " ]");
         }
         System.out.println("_________________________________________________");
 
     }
 
     public static void printFieldAfterCheck(int[][] field, int y, int x) {
+        for (int i = 0; i <= 9; i++) {
+            System.out.print("[ " + i + " ]");
+        }
+        System.out.println("");
         System.out.println("_________________________________________________");
 
-        if(field[y][x]==1){
-            field[y][x]=11;
+
+        if (field[y][x] == 1) {
+            field[y][x] += 10;
         }
-        if(field[y][x]==2){
-            field[y][x]=22;
+        if (field[y][x] == 2) {
+            field[y][x] += 20;
         }
-        if(field[y][x]==3){
-            field[y][x]=33;
+        if (field[y][x] == 3) {
+            field[y][x] += 30;
         }
-        if(field[y][x]==4){
-            field[y][x]=44;
+        if (field[y][x] == 4) {
+            field[y][x] += 40;
         }
-        if(field[y][x]==5){
-            field[y][x]=55;
+        if (field[y][x] == 5) {
+            field[y][x] += 50;
         }
-        if(field[y][x]==6){
-            field[y][x]=66;
+        if (field[y][x] == 6) {
+            field[y][x] += 60;
         }
-        if(field[y][x]==0){
-            field[y][x]=77;
+        if (field[y][x] == 0) {
+            field[y][x] += 77;
         }
-        if(field[y][x]==9){
-            field[y][x]=99;
+        if (field[y][x] == 9) {
+            field[y][x] += 90;
         }
 
 
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[i].length; j++) {
                 if (field[i][j] == 77) {
-                    System.out.print("[ " + " " + " ]");  //field[i][j]
+                    System.out.print("[ " + " " + " ]");  //field[i][j] " "
                 }
                 if (field[i][j] == 99) {
-                    System.out.print("[ " + "*" + " ]");  //field[i][j]
+                    System.out.print("[ " + "*" + " ]");  //field[i][j] "*"
                 }
                 if (field[i][j] == 66) {
-                    System.out.print("[ " + "6" + " ]");  //field[i][j]
+                    System.out.print("[ " + "6" + " ]");  //field[i][j]  "6"
                 }
                 if (field[i][j] == 55) {
-                    System.out.print("[ " + "5" + " ]");  //field[i][j]
+                    System.out.print("[ " + "5" + " ]");  //field[i][j] "5"
                 }
                 if (field[i][j] == 44) {
-                    System.out.print("[ " + "4" + " ]");  //field[i][j]
+                    System.out.print("[ " + "4" + " ]");  //field[i][j] "4"
                 }
                 if (field[i][j] == 33) {
-                    System.out.print("[ " + "3" + " ]");  //field[i][j]
+                    System.out.print("[ " + "3" + " ]");  //field[i][j] "3"
                 }
                 if (field[i][j] == 22) {
-                    System.out.print("[ " + "2" + " ]");  //field[i][j]
+                    System.out.print("[ " + "2" + " ]");  //field[i][j]"2"
                 }
-                if (field[i][j] ==11) {
-                    System.out.print("[ " + "1" + " ]");  //field[i][j]
-                }else {
-                    System.out.print("[ " + "?" + " ]");
+                if (field[i][j] == 11) {
+                    System.out.print("[ " + "1" + " ]");  //field[i][j]   "1"
+                }
+                if (field[i][j] != 11 && field[i][j] != 22 && field[i][j] != 33 && field[i][j] != 44 && field[i][j] != 55 && field[i][j] != 66 && field[i][j] != 77 && field[i][j] != 99) {
+                    System.out.print("[ " + "?" + " ]");  //"?" field[i][j]
                 }
 
+
             }
-            System.out.println();
+            System.out.println("|" + "[" + i + "]");
         }
         System.out.println("_________________________________________________");
 
@@ -175,4 +196,28 @@ printFieldAfterCheck(field,y,x);
         return field;
     }
 
+    public static int checkIfAllTheFieldsOpened(int[][] field, int b) {
+        int counterForLeftBombs = 0;
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field[i].length; j++) {
+
+                if ((field[i][j] == 9) || (field[i][j] == 0)) {
+                    b = 1;
+                    if (field[i][j] == 9) {
+                        counterForLeftBombs++;
+                    }
+
+                } else {
+                    b = 2;
+                }
+
+            }
+
+        }
+        if (b == 2) {
+            System.out.println("No more fields to open");
+            System.out.println("There are still " + counterForLeftBombs + " unopened fields with bombs");
+        }
+        return b;
+    }
 }
