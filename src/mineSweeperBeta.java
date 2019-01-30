@@ -15,6 +15,7 @@ public class mineSweeperBeta {
         printField(field);
 
         int a = 0;
+        int b=0;
 
         int x;
         int y;
@@ -33,7 +34,9 @@ public class mineSweeperBeta {
                     if (field[y][x] == 9) {
                         System.out.println("there is a bomb");
                     } else {
-                        System.out.println("there is " + field[y][x] + " bombs nearby");
+                        if (field[y][x] < 10) {
+                            System.out.println("there is " + field[y][x] + " bombs nearby");
+                        }
                     }
                     printFieldAfterCheck(field, y, x);
 
@@ -43,7 +46,9 @@ public class mineSweeperBeta {
                     System.out.println(zeroTime.substring(14, 19));
                 }
             }
-            a = checkIfAllTheFieldsOpened(field, a);
+
+            a = checkIfAllTheFieldsOpened(field, b);
+
         } while ((x != 100 || y != 100) && a == 1);
         System.out.println("You have quit the game");
     }
@@ -158,7 +163,7 @@ public class mineSweeperBeta {
         int flags = 0;
         for (int i = 1; i < field.length - 1; i++) {
             for (int j = 1; j < field[i].length - 1; j++) {
-
+// gives a flags for the bombs, but cant cover the beginning and the end of the field
                 if (field[i][j] != 9) {
 
                     if (field[i][j + 1] == 9) {
@@ -193,6 +198,175 @@ public class mineSweeperBeta {
             }
 
         }
+// give value of flags for the upper part of the array
+        flags = 0;
+        for (int i = field.length - 1; i < field.length; i++) {
+            for (int j = 1; j < field[i].length - 1; j++) {
+
+                if (field[0][j] != 9) {
+
+                    if (field[0][j + 1] == 9) {
+                        flags++;
+                    }
+                    if (field[0][j - 1] == 9) {
+                        flags++;
+                    }
+                    if (field[1][j] == 9) {
+                        flags++;
+                    }
+                    if (field[1][j + 1] == 9) {
+                        flags++;
+                    }
+                    if (field[1][j - 1] == 9) {
+                        flags++;
+                    }
+
+                    field[0][j] = flags;
+                    flags = 0;
+                }
+
+                // give value of flags for the down part of the array
+                if (field[field.length - 1][j] != 9) {
+
+                    if (field[field.length - 1][j + 1] == 9) {
+                        flags++;
+                    }
+                    if (field[field.length - 1][j - 1] == 9) {
+                        flags++;
+                    }
+                    if (field[field.length - 2][j] == 9) {
+                        flags++;
+                    }
+                    if (field[field.length - 2][j + 1] == 9) {
+                        flags++;
+                    }
+                    if (field[field.length - 2][j - 1] == 9) {
+                        flags++;
+                    }
+
+                    field[field.length - 1][j] = flags;
+                    flags = 0;
+                }
+
+
+            }
+
+            flags = 0;
+        }
+
+        flags = 0;
+        // give value of flags for the left and right side of the array
+        for (int i = 1; i < field.length - 1; i++) {
+
+
+            if (field[i][0] != 9) {
+
+                if (field[i][1] == 9) {
+                    flags++;
+                }
+                if (field[i - 1][0] == 9) {
+                    flags++;
+                }
+                if (field[i + 1][0] == 9) {
+                    flags++;
+                }
+                if (field[i + 1][1] == 9) {
+                    flags++;
+                }
+                if (field[i - 1][1] == 9) {
+                    flags++;
+                }
+
+                field[i][0] = flags;
+                flags = 0;
+            }
+            flags = 0;
+
+
+            if (field[i][field[i].length - 1] != 9) {
+
+                if (field[i][field[i].length - 1] == 9) {
+                    flags++;
+                }
+                if (field[i - 1][field[i].length - 1] == 9) {
+                    flags++;
+                }
+                if (field[i + 1][field[i].length - 1] == 9) {
+                    flags++;
+                }
+                if (field[i + 1][field[i].length - 2] == 9) {
+                    flags++;
+                }
+                if (field[i - 1][field[i].length - 2] == 9) {
+                    flags++;
+                }
+
+                field[i][field[i].length - 1] = flags;
+                flags = 0;
+            }
+            flags = 0;
+
+        }
+
+        //catching the corners if there is a bomb is nearby
+        flags = 0;
+        if (field[0][0] != 9) {
+
+            if (field[0][1] == 9) {
+                flags++;
+            }
+            if (field[1][0] == 9) {
+                flags++;
+            }
+            if (field[1][1] == 9) {
+                flags++;
+            }
+            field[0][0] = flags;
+        }
+
+        flags = 0;
+        if (field[0][9] != 9) {
+
+            if (field[0][8] == 9) {
+                flags++;
+            }
+            if (field[1][9] == 9) {
+                flags++;
+            }
+            if (field[1][8] == 9) {
+                flags++;
+            }
+            field[0][9] = flags;
+        }
+        flags = 0;
+        if (field[5][9] != 9) {
+
+            if (field[5][8] == 9) {
+                flags++;
+            }
+            if (field[4][9] == 9) {
+                flags++;
+            }
+            if (field[4][8] == 9) {
+                flags++;
+            }
+            field[5][9] = flags;
+        }
+        flags = 0;
+        if (field[5][0] != 9) {
+
+            if (field[4][0] == 9) {
+                flags++;
+            }
+            if (field[5][1] == 9) {
+                flags++;
+            }
+            if (field[4][1] == 9) {
+                flags++;
+            }
+            field[5][0] = flags;
+        }
+
         return field;
     }
 
@@ -201,7 +375,7 @@ public class mineSweeperBeta {
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[i].length; j++) {
 
-                if ((field[i][j] == 9) || (field[i][j] == 0)) {
+                if (field[i][j] == 0) {
                     b = 1;
                     if (field[i][j] == 9) {
                         counterForLeftBombs++;
