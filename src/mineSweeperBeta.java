@@ -5,22 +5,21 @@ import java.util.Scanner;
 public class mineSweeperBeta {
     public static void main(String[] args) {
 
-        int[][] field = new int[6][10];
         Random bombGenerator = new Random();
         Scanner input = new Scanner(System.in);
+        int[][] field = new int[6][10];
         int couter = 0;
+        int a = 0;
+        int b = 0;
+        int x;
+        int y;
 
         placeBombsOnTheField(field, bombGenerator);
         placingFlagsOnTheField(field);
         printField(field);
 
-        int a = 0;
-        int b=0;
 
-        int x;
-        int y;
         do {
-
             System.out.println("Enter coordinate y: ");
             y = input.nextInt();
             System.out.println("Enter coordinate x: ");
@@ -34,24 +33,27 @@ public class mineSweeperBeta {
                     if (field[y][x] == 9) {
                         System.out.println("there is a bomb");
                     } else {
-                        if (field[y][x] < 10) {
+
+                        if (field[y][x] < 10) {                                                 // to print only da values before changing
                             System.out.println("there is " + field[y][x] + " bombs nearby");
                         }
                     }
+
                     printFieldAfterCheck(field, y, x);
-
-
                     Date time = new Date();
                     String zeroTime = time.toString();
                     System.out.println(zeroTime.substring(14, 19));
+
                 }
             }
 
             a = checkIfAllTheFieldsOpened(field, b);
 
         } while ((x != 100 || y != 100) && a == 1);
+
         System.out.println("You have quit the game");
     }
+
 
     public static void printField(int[][] field) {
         for (int i = 0; i <= 9; i++) {
@@ -106,6 +108,7 @@ public class mineSweeperBeta {
 
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[i].length; j++) {
+
                 if (field[i][j] == 77) {
                     System.out.print("[ " + " " + " ]");  //field[i][j] " "
                 }
@@ -133,14 +136,17 @@ public class mineSweeperBeta {
                 if (field[i][j] != 11 && field[i][j] != 22 && field[i][j] != 33 && field[i][j] != 44 && field[i][j] != 55 && field[i][j] != 66 && field[i][j] != 77 && field[i][j] != 99) {
                     System.out.print("[ " + "?" + " ]");  //"?" field[i][j]
                 }
-
-
             }
+
             System.out.println("|" + "[" + i + "]");
         }
+
         System.out.println("_________________________________________________");
 
     }
+
+
+
 
     public static int[][] placeBombsOnTheField(int[][] field, Random bomb) {
 
@@ -158,6 +164,11 @@ public class mineSweeperBeta {
         }
         return field;
     }
+
+
+
+
+
 
     public static int[][] placingFlagsOnTheField(int[][] field) {
         int flags = 0;
@@ -370,6 +381,11 @@ public class mineSweeperBeta {
         return field;
     }
 
+
+
+
+
+
     public static int checkIfAllTheFieldsOpened(int[][] field, int b) {
         int counterForLeftBombs = 0;
         for (int i = 0; i < field.length; i++) {
@@ -377,11 +393,12 @@ public class mineSweeperBeta {
 
                 if (field[i][j] == 0) {
                     b = 1;
+
+
+                } else {
                     if (field[i][j] == 9) {
                         counterForLeftBombs++;
                     }
-
-                } else {
                     b = 2;
                 }
 
